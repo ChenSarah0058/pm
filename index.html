@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>歡迎來到 Weiinfo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: linear-gradient(135deg, #0a0e27 0%, #1a0a3d 50%, #050811 100%);
+            color: #e4f2ff;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(168, 85, 247, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 50% 80%, rgba(0, 255, 136, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+            animation: bgPulse 8s ease-in-out infinite;
+        }
+
+        @keyframes bgPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        .welcome-container {
+            text-align: center;
+            z-index: 2;
+            position: relative;
+            animation: welcomeEntrance 2s ease-out;
+        }
+
+        @keyframes welcomeEntrance {
+            0% {
+                opacity: 0;
+                transform: translateY(50px) scale(0.8);
+            }
+            50% {
+                opacity: 1;
+                transform: translateY(-10px) scale(1.05);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .weiinfo-logo {
+            font-size: 6rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #00d4ff 0%, #ffffff 50%, #06f9ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: cyberFlicker 4s infinite, logoFloat 6s ease-in-out infinite;
+            text-shadow: 0 0 40px rgba(0, 212, 255, 0.6);
+            letter-spacing: 8px;
+        }
+
+        @keyframes cyberFlicker {
+            0%, 100% { 
+                filter: drop-shadow(0 0 10px #00d4ff);
+            }
+            25% { 
+                filter: drop-shadow(0 0 20px #7c3aed);
+            }
+            50% { 
+                filter: drop-shadow(0 0 15px #00ff88);
+            }
+            75% { 
+                filter: drop-shadow(0 0 25px #06f9ff);
+            }
+        }
+
+        @keyframes logoFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .welcome-title {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: #06f9ff;
+            animation: titleGlow 3s ease-in-out infinite;
+            letter-spacing: 3px;
+        }
+
+        @keyframes titleGlow {
+            0%, 100% { 
+                text-shadow: 0 0 20px rgba(6, 249, 255, 0.5);
+            }
+            50% { 
+                text-shadow: 0 0 40px rgba(6, 249, 255, 0.9), 0 0 60px rgba(0, 212, 255, 0.4);
+            }
+        }
+
+        .welcome-subtitle {
+            font-size: 1.4rem;
+            color: #e4f2ff;
+            margin-bottom: 40px;
+            opacity: 0.9;
+            letter-spacing: 1px;
+        }
+
+        .status-bar {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(10, 14, 39, 0.8);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 25px;
+            padding: 12px 25px;
+            font-size: 0.95rem;
+            letter-spacing: 1px;
+            animation: statusPulse 4s ease-in-out infinite;
+        }
+
+        @keyframes statusPulse {
+            0%, 100% { 
+                box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+            }
+            50% { 
+                box-shadow: 0 0 35px rgba(0, 212, 255, 0.6);
+            }
+        }
+
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #00d4ff;
+            border-radius: 50%;
+            animation: particleFloat linear infinite;
+        }
+
+        @keyframes particleFloat {
+            0% {
+                transform: translateY(100vh) scale(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) scale(1);
+                opacity: 0;
+            }
+        }
+
+        .scan-line {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #00d4ff, transparent);
+            box-shadow: 0 0 20px #00d4ff;
+            animation: scanLine 6s linear infinite;
+            z-index: 1;
+        }
+
+        @keyframes scanLine {
+            0% {
+                transform: translateY(-100%);
+            }
+            100% {
+                transform: translateY(100vh);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .weiinfo-logo {
+                font-size: 4rem;
+                letter-spacing: 4px;
+            }
+            
+            .welcome-title {
+                font-size: 2rem;
+            }
+            
+            .welcome-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .status-bar {
+                font-size: 0.85rem;
+                padding: 10px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="scan-line"></div>
+    <div class="particles" id="particles"></div>
+    
+    <div class="welcome-container">
+        <div class="weiinfo-logo">WEIINFO</div>
+        <div class="welcome-title">歡迎來到</div>
+        <div class="welcome-subtitle">你的專業成長宇宙 🚀</div>
+    </div>
+    
+    <div class="status-bar">
+        [系統啟動完成] 準備進入 PM 超展開模式...
+    </div>
+
+    <script>
+        // 創建粒子效果
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                particle.style.animationDelay = Math.random() * 2 + 's';
+                particle.style.background = `hsl(${Math.random() * 60 + 180}, 100%, 60%)`;
+                particlesContainer.appendChild(particle);
+
+                // 每隔一段時間重新生成
+                setTimeout(() => {
+                    particle.remove();
+                }, 10000);
+            }
+        }
+
+        // 持續生成粒子
+        setInterval(createParticles, 3000);
+        createParticles(); // 初始生成
+
+        // 打字機效果給狀態列
+        const statusTexts = [
+            '[系統啟動完成] 準備進入 PM 超展開模式...',
+            '[AI 核心載入] 分析你的專業成長路徑...',
+            '[技能矩陣就緒] 即將展開職涯探險...',
+            '[Weiinfo 啟動] 歡迎來到未來工作世界...'
+        ];
+        let statusIndex = 0;
+
+        setInterval(() => {
+            const statusBar = document.querySelector('.status-bar');
+            statusIndex = (statusIndex + 1) % statusTexts.length;
+            statusBar.textContent = statusTexts[statusIndex];
+        }, 5000);
+    </script>
+</body>
+</html>
